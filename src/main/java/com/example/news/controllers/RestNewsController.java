@@ -1,5 +1,7 @@
 package com.example.news.controllers;
 
+import com.example.news.dto.NewDto;
+import com.example.news.exceptions.NewCreationException;
 import com.example.news.exceptions.NewNotFoundException;
 import com.example.news.models.New;
 import com.example.news.repos.NewsRepo;
@@ -24,6 +26,15 @@ public class RestNewsController {
     @GetMapping("/{id}")
     public New getNewById(@PathVariable Long id) {
         return newsService.getNewById(id);
+    }
+
+    @PostMapping
+    public ResponseEntity<String> createNew(@RequestBody(required = false) NewDto newDto) {
+        if (newDto == null) {
+            throw new NewCreationException("Данные новости не предоставлены");
+        }
+        newsService.createNew(newDto);
+        return ResponseEntity.ok("Новость '" + newDto.getTitle() + "' успешно создана");
     }
 
     @DeleteMapping("/{id}")
