@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Новость не найдена | Новостной портал</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: #2c3e50;
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            flex: 1;
+            padding: 2rem 0;
+        }
+
+        .error-detail {
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border: 1px solid #e8e8e8;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .error-detail::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+        }
+
+        .error-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            color: #e74c3c;
+        }
+
+        .error-title {
+            color: #2c3e50;
+            font-size: 2.2rem;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .error-message {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.7rem 1.5rem;
+            border: 2px solid #3498db;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            margin-top: 1rem;
+        }
+
+        .back-button:hover {
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            transform: translateX(-5px);
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="container">
+        <div class="header-content">
+            <div class="logo">НОВОСТИ</div>
+            <nav>
+                <ul>
+                    <li><a href="/news">Главная</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+<main>
+    <div class="container">
+        <article class="error-detail">
+            <div class="error-icon">📰❌</div>
+            <h1 class="error-title">Новость не найдена</h1>
+            <div class="error-message">
+                Извините, запрашиваемая новость не существует или была удалена.
+            </div>
+            <a href="/news" class="back-button">← Назад к списку новостей</a>
+        </article>
+    </div>
+</main>
+<footer>
+    <div class="container">
+        <p>&copy; 2024 Новостной портал. Все права защищены.</p>
+        <p>Контакты: info@newsportal.ru | +7 (495) 123-45-67</p>
+    </div>
+</footer>
+</body>
+</html>
