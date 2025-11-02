@@ -1,12 +1,11 @@
 package com.example.news.controllers;
 
+import com.example.news.dto.NewDto;
 import com.example.news.exceptions.NewNotFoundException;
 import com.example.news.services.NewsService;
-import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -28,6 +27,17 @@ public class MainNewsController {
         } catch (NewNotFoundException e) {
             return "new-not-found";
         }
+    }
+
+    @GetMapping("/create")
+    public String showCreateForm() {
+        return "create-new";
+    }
+
+    @PostMapping("/create")
+    public String createNew(@ModelAttribute NewDto newDto) {
+        newsService.createNew(newDto);
+        return "redirect:/news";
     }
 
     @PostMapping("/{id}/delete")
