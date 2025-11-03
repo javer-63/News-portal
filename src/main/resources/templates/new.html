@@ -141,7 +141,11 @@
         .back-button {
             color: #3498db;
             border: 2px solid #3498db;
+        }
 
+        .edit-button {
+            color: #27ae60;
+            border: 2px solid #27ae60;
         }
 
         .delete-button {
@@ -149,7 +153,7 @@
             border: 2px solid red;
         }
 
-        .back-button, .delete-button {
+        .back-button, .edit-button, .delete-button {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
@@ -160,15 +164,28 @@
             transition: all 0.3s ease;
             font-size: 1rem;
             margin-top: 1rem;
+            margin-right: 1rem;
         }
 
         .back-button:hover {
             background: #3498db;
             color: white;
         }
+
+        .edit-button:hover {
+            background: #27ae60;
+            color: white;
+        }
+
         .delete-button:hover {
             background: red;
             color: white;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
         }
 
         footer {
@@ -206,11 +223,15 @@
             <hr>
             <h2 class="news-description" th:text="${newItem.getDescription()}"></h2>
             <hr>
-            <div class="news-content"></div>
-            <form th:action="'/news/' + ${newItem.getId()} + '/delete'" method="post">
-                <button class="delete-button" type="submit">Удалить</button>
-            </form>
-            <a href="/news" class="back-button">← Назад к списку новостей</a>
+            <div class="news-content" th:text="${newItem.getContent()}"></div>
+
+            <div class="button-group">
+                <a th:href="'/news/' + ${newItem.getId()} + '/update'" class="edit-button">✏️ Изменить</a>
+                <form th:action="'/news/' + ${newItem.getId()} + '/delete'" method="post" style="display: inline;">
+                    <button class="delete-button" type="submit" onclick="return confirm('Вы уверены, что хотите удалить эту новость?')">🗑️ Удалить</button>
+                </form>
+                <a href="/news" class="back-button">← Назад к списку</a>
+            </div>
         </article>
     </div>
 </main>
