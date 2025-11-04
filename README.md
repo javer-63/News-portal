@@ -158,7 +158,7 @@
 - Maven 3.6+
 - Postgres
 
-### Запуск приложения
+        ### Запуск приложения
 
 1. **Клонировать репозиторий**
 ```bash
@@ -168,22 +168,30 @@ cd News-portal
 
 2. **Создать базу данных в PostgreSQL**
 ```bash
-createdb news
+CREATE DATABASE news;
 ```
 
-3. **Сборка приложения**
+3. **Настроить подключение к БД**
+   - Открыть `src/main/resources/application.properties`
+   - Заменить username и password на ваши данные PostgreSQL:
+```properties
+spring.datasource.username=your_postgres_username
+spring.datasource.password=your_postgres_password
+```
+
+4. **Сборка приложения**
 ```bash
 mvn clean package
 ```
 
-4. **Запуск приложения**
+5. **Запуск приложения**
 ```bash
 mvn spring-boot:run
 ```
 
-5. **Доступ к приложению**
-    - Веб-интерфейс: http://localhost:8080/news
-    - REST API: http://localhost:8080/api/news
+6. **Доступ к приложению**
+   - Веб-интерфейс: http://localhost:8080/news
+   - REST API: http://localhost:8080/api/news
 
 ## 📚 Использование API
 
