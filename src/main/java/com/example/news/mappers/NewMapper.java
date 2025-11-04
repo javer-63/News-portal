@@ -21,11 +21,17 @@ public class NewMapper {
 
     public NewDto newToDto(New aNew) {
         if (aNew == null) return null;
-        NewDto newDto = new NewDto();
-        newDto.setTitle(aNew.getTitle());
-        newDto.setDescription(aNew.getDescription());
-        newDto.setContent(aNew.getContent());
+        return new NewDto(
+                aNew.getTitle(),
+                aNew.getDescription(),
+                aNew.getContent()
+        );
+    }
 
-        return newDto;
+    public void updateNewFromDto(New existingNew, NewDto newDto) {
+        if (newDto == null || existingNew == null) return;
+        existingNew.setTitle(newDto.getTitle());
+        existingNew.setDescription(newDto.getDescription());
+        existingNew.setContent(newDto.getContent());
     }
 }

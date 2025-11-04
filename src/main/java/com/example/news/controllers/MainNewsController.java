@@ -2,6 +2,7 @@ package com.example.news.controllers;
 
 import com.example.news.dto.NewDto;
 import com.example.news.exceptions.NewNotFoundException;
+import com.example.news.mappers.NewMapper;
 import com.example.news.models.New;
 import com.example.news.services.NewsService;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 public class MainNewsController {
 
     private final NewsService newsService;
+
+    private final NewMapper newMapper;
 
     @GetMapping
     public String main(Model model) {
@@ -46,9 +49,7 @@ public class MainNewsController {
     @GetMapping("/{id}/update")
     public String showUpdateForm(@PathVariable Long id, Model model) {
         try {
-            New aNew = newsService.getNewById(id);
-            NewDto newDto = new NewDto(aNew.getTitle(), aNew.getDescription(), aNew.getContent());
-            model.addAttribute("newDto", newDto);
+            model.addAttribute("newDto", newMapper.newToDto(newsService.getNewById(id)));
             model.addAttribute("id", id);
             return "update-new";
         } catch (NewNotFoundException e) {
@@ -61,7 +62,6 @@ public class MainNewsController {
         newsService.updateNew(id, newDto);
         return "redirect:/news";
     }
-
 
     @PostMapping("/{id}/delete")
     public String deleteNewPost(@PathVariable Long id) {

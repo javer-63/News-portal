@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -54,18 +55,16 @@ public class NewsService {
     @Transactional
     public New createNew(NewDto newDto) {
         validateNewDto(newDto);
-        New savedNew = newsRepo.save(newMapper.dtoToNew(newDto));
+        New aNew = newsRepo.save(newMapper.dtoToNew(newDto));
         log.info("Новость '{}' успешно создана", newDto.getTitle());
-        return savedNew;
+        return aNew;
     }
 
     @Transactional
     public New updateNew(Long id, NewDto newDto) {
         validateNewDto(newDto);
         New aNew = findNewOrThrow(id);
-        aNew.setTitle(newDto.getTitle());
-        aNew.setDescription(newDto.getDescription());
-        aNew.setContent(newDto.getContent());
+        newMapper.updateNewFromDto(aNew, newDto);
         New updatedNew = newsRepo.save(aNew);
         log.info("Новость с ID {} успешно обновлена", id);
         return updatedNew;
