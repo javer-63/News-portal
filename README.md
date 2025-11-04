@@ -165,17 +165,22 @@ git clone https://github.com/javer-63/News-portal.git
 cd News-portal
 ```
 
-2. **Сборка приложения**
+2. **Создать базу данных в PostgreSQL**
+```bash
+createdb news
+```
+
+3. **Сборка приложения**
 ```bash
 mvn clean package
 ```
 
-3. **Запуск приложения**
+4. **Запуск приложения**
 ```bash
 mvn spring-boot:run
 ```
 
-4. **Доступ к приложению**
+5. **Доступ к приложению**
     - Веб-интерфейс: http://localhost:8080/news
     - REST API: http://localhost:8080/api/news
 
