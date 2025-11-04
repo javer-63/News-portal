@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -70,6 +71,16 @@ public class NewsService {
         return updatedNew;
     }
 
+    @Transactional
+    public New partUpdateNew(Long id, NewDto newUpdates) {
+        New aNew = findNewOrThrow(id);
+        Optional.ofNullable(newUpdates.getTitle()).ifPresent(aNew::setTitle);
+        Optional.ofNullable(newUpdates.getDescription()).ifPresent(aNew::setDescription);
+        Optional.ofNullable(newUpdates.getContent()).ifPresent(aNew::setContent);
+        New updatedNew = newsRepo.save(aNew);
+        log.info("Новость с ID {} частично обновлена", id);
+        return updatedNew;
+    }
     @Transactional
     public void deleteNewById(Long id) {
         newsRepo.delete(findNewOrThrow(id));

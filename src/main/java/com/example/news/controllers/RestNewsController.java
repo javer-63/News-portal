@@ -46,6 +46,17 @@ public class RestNewsController {
         return ResponseEntity.ok(updatedNew);
     }
 
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<New> patchNew(@PathVariable Long id,
+                                        @RequestBody(required = false) NewDto newUpdates) {
+        if (newUpdates == null) {
+            throw new NewValidationException("Данные для обновления не предоставлены");
+        }
+        New updatedNew = newsService.partUpdateNew(id, newUpdates);
+        return ResponseEntity.ok(updatedNew);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteNewById(@PathVariable Long id) {
         newsService.deleteNewById(id);
